@@ -5,7 +5,7 @@
 # Run this script from the folder you wish to create the API.
 
 # Create subdirectory structure
-mkdir app config app/components app/router
+mkdir app config app/components app/components/template app/router app/lib
 
 # Install dependencies
 npm init -y &&
@@ -33,12 +33,12 @@ echo '{
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module",
-        "ecmaFeatures\": {}
+        "ecmaFeatures": {}
     },
     "rules": {
         "no-const-assign": 2,
         "no-duplicate-imports": 2,
-        "no-unused-vars": [2, { \"ignoreRestSiblings\": true }],
+        "no-unused-vars": [2, { "ignoreRestSiblings": true }],
         "no-var": 2,
         "prefer-const": 2,
         "no-new-object": 2,
@@ -66,9 +66,9 @@ echo '{
         "function-paren-newline": 2,
         "prefer-arrow-callback": 2,
         "arrow-spacing": 2,
-        "arrow-parens": ["error", \"always\"],
+        "arrow-parens": ["error", "always"],
         "arrow-body-style": 2,
-        "no-confusing-arrow": ["error", { \"allowParens\": true }],
+        "no-confusing-arrow": ["error", { "allowParens": true }],
         "implicit-arrow-linebreak": 2,
         "no-useless-constructor": 2,
         "no-dupe-class-members": 2,
@@ -79,7 +79,7 @@ echo '{
         "generator-star-spacing": 2,
         "dot-notation": 2,
         "no-restricted-properties": 2,
-        "one-var": ["error", \"never\"],
+        "one-var": ["error", "never"],
         "no-multi-assign": 2,
         "operator-linebreak": 2,
         "eqeqeq": 2,
@@ -89,15 +89,15 @@ echo '{
         "nonblock-statement-body-position": 2,
         "brace-style": 2,
         "no-else-return": 2,
-        "spaced-comment": ["error", "always", { "markers": [\"/\"] } ],
-        "indent": ["error", 2, { "SwitchCase\": 1 }],
+        "spaced-comment": ["error", "always", { "markers": ["/"] } ],
+        "indent": ["error", 2, { "SwitchCase": 1 }],
         "keyword-spacing": 2,
         "space-infix-ops": 2,
         "eol-last": 2,
         "no-whitespace-before-property": 2,
         "space-in-parens": 2,
         "array-bracket-spacing": 2,
-        "object-curly-spacing": [\"error\", \"always\"],
+        "object-curly-spacing": ["error", "always"],
         "block-spacing": 2,
         "comma-spacing": 2,
         "computed-property-spacing": 2,
@@ -105,27 +105,27 @@ echo '{
         "key-spacing": 2,
         "no-trailing-spaces": 2,
         "comma-style": 2,
-        "comma-dangle": [\"error\", \"always-multiline\"],
+        "comma-dangle": ["error", "always-multiline"],
         "semi": 2,
         "no-new-wrappers": 2,
         "no-underscore-dangle": ["error", { "allow": ["_readableState"] }],
-        "new-cap": ["error", { "capIsNewExceptionPattern\": \"\.Router\" }],
+        "new-cap": 0,
         "no-restricted-globals": 2,
         "quote-props": ["error", "as-needed"],
-        "quotes": ["error", \"single\"],
+        "quotes": ["error", "single"],
         "no-undef": 2,
         "padded-blocks": ["error", "never"],
-        "no-multiple-empty-lines": [\"error\", { \"max\": 3 }],
-        "radix": "off",
-        "id-length": "off",
-        "max-len": "off",
-        "camelcase": "off",
-        "no-nested-ternary": "off",
-        "no-plusplus\": [\"error\", { \"allowForLoopAfterthoughts\": true }]
+        "no-multiple-empty-lines": ["error", { "max": 3 }],
+        "radix": 2,
+        "id-length": 2,
+        "max-len": 0,
+        "camelcase": 2,
+        "no-nested-ternary": 2,
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
     },
     "env": {
         "node": true,
-        "es6\": true
+        "es6": true
     }
 }
 ' > .eslintrc.json &&
@@ -166,6 +166,43 @@ class Application {
 (async () => await new Application().start(config.port))();
 " > app/app.js &&
 
+# Write app/lib/error.js
+echo "export class Err extends Error {
+  constructor ({
+    message,
+    code = 500,
+    context = '',
+  }) {
+    super(message);
+    this.code = code;
+    this.context = context;
+    Error.captureStackTrace(this, this.constructor);
+  }
+}
+
+export const errHandler = (err, next, context = 'No context provided') => {
+  if (err instanceof Err) return next(err);
+
+  return next(new Err({
+    message: err,
+    code: 500,
+    context,
+  }));
+};
+" > app/lib/error.js &&
+
+# Write app/lib/helpers.js
+echo 'export const asCallBack = (promise) => promise.then((data) => [null, data]).catch((err) => [err]);
+
+export const pick = (obj, includeArray = []) => {
+  const newObj = {};
+  includeArray.forEach((key) => {
+    newObj[key] = obj[key];
+  });
+  return newObj;
+};
+' > app/lib/helpers.js &&
+
 # Write app/router/index.js
 echo "import express from 'express';
 
@@ -188,5 +225,91 @@ const config = {
 
 export default config;
 " > config/index.js &&
+
+# Write app/components/template/index.js
+echo "export class Template {
+  static get = async () => {
+    console.log('get');
+    return 'get';
+  };
+
+  static create = async () => {
+    console.log('create');
+    return 'create';
+  };
+
+  static update = async () => {
+    console.log('update');
+    return 'update';
+  };
+
+  static destroy = async () => {
+    console.log('delete');
+    return 'delete';
+  };
+}
+" > app/components/template/index.js &&
+
+# Write app/components/template/routes.js
+echo "import { asCallBack, pick } from '../../lib/helpers.js';
+import { errHandler } from '../../lib/error.js';
+import router from '../../router/index.js';
+import { Template } from './index.js';
+
+
+const bodyPropertyList = [
+  'prop1',
+  'prop2',
+  'prop3',
+];
+
+// Get
+router.get(
+  '/template',
+  async (req, res, next) => {
+    const [err, results] = await asCallBack(Template.get());
+    if (err) return errHandler(err, next, 'Template.get');
+    return res.status(200).json(results);
+  },
+);
+
+// Create
+router.post(
+  '/template',
+  async (req, res, next) => {
+    const payload = pick(req.body, bodyPropertyList);
+    const [err, resultUUID] = await asCallBack(Template.create(payload));
+    if (err) return errHandler(err, next, \`Template.create: \${JSON.stringify(payload)}\`);
+    return res.status(201).json(resultUUID);
+  },
+);
+
+// Update
+router.put(
+  '/template/:uuid',
+  async (req, res, next) => {
+    const { uuid } = req.params;
+    const payload = pick(req.body, bodyPropertyList);
+    const [err, results] = await asCallBack(Template.update(uuid, payload));
+    if (err) return errHandler(err, next, \`Template.update: \${uuid}, \${JSON.stringify(payload)}\`);
+    return res.status(200).json(results);
+  },
+);
+
+// Delete
+router.delete(
+  '/template/:uuid',
+  async (req, res, next) => {
+    const { uuid } = req.params;
+    const [err, results] = await asCallBack(Template.destroy(uuid));
+    if (err) return errHandler(err, next, \`Template.destroy: \${uuid}\`);
+    return res.status(200).json(results);
+  },
+);
+
+
+export default router;
+" > app/components/template/routes.js
+
 
 echo '\nFin! 🚀\n'
