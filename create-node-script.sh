@@ -6,7 +6,7 @@
 if [ -d './app/scripts' ]; then
   echo "Creating './app/scripts/$1.js'..."
   echo "import Yargs from 'yargs';
-const { argv } = Yargs(process.argv.slice(2));
+const { argv } = Yargs(process.argv);
 
 /**
  * {DESCRIPTION}
@@ -22,7 +22,7 @@ const $1 = async (run) => {
   try {
     // If dry run
     if (!run) {
-      console.log('Use \'--run\' to {DO STUFF}.');
+      console.log('Use \'--run\' to {DO STUFF}.\\\n');
       return;
     }
 
