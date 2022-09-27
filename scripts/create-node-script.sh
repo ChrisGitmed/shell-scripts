@@ -1,10 +1,11 @@
-# This script receives the name of the script to be created as its only argument,
-# and outputs a Node.js script template in either the 'app/scripts/' or 'scripts/'
-# directories, if they exist. If they do not, no script will be created.
+# Creates a basic Node.js script file in './app/scripts/', if
+# the directory exists, if it does not, it creates the file in
+# './scripts/', if that directory does not exist either, no file
+# will be created. The desired script name is the only parameter.
 #
 # @param $1 - The name of the script to be created
 
-TEMPLATE="import Yargs from 'yargs';
+template="import Yargs from 'yargs';
 const { argv } = Yargs(process.argv);
 
 /**
@@ -41,11 +42,11 @@ const $1 = async (run) => {
 
 if [ -d 'app/scripts' ]; then
   echo "Creating 'app/scripts/$1.js'..."
-  echo "$TEMPLATE" > app/scripts/"$1.js"
+  echo "$template" > app/scripts/"$1.js"
   echo "Created."
 elif [ -d 'scripts' ]; then
   echo "Creating 'scripts/$1.js..."
-  echo "$TEMPLATE" > scripts/"$1.js"
+  echo "$template" > scripts/"$1.js"
   echo "Created."
 else
   echo "Neither 'app/scripts' nor 'scripts' directories found.\nAborting script..."
