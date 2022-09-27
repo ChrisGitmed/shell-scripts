@@ -11,14 +11,14 @@ sh .../create-node-api.sh
 ```
 
 ## create-node-script.sh
-Creates a templatatized Node.js script file in `./app/scripts`, if the directory exists.
+Creates a basic Node.js script file in `./app/scripts/`, if the directory exists, if it does not, it creates the file in `./scripts/`, if that directory does not exist either, no file will be created. The desired script name is the only parameter.
 #### Usage
 ```
 sh .../create-node-script.sh scriptName
 ```
 
 ## file-splitter.sh
-Splits a large CSV into multiple smaller CSVs, preserving headers. The size of each chunk (number of rows) is determined by parameters. Outputs the resulting CSVs to a subdirectory `split/` residing in the directory where this script is invoked.
+Splits a large CSV into multiple smaller CSVs, preserving headers. The size of each chunked CSV is determined by the second parameter. Outputs the resulting CSVs to a subdirectory `split/` residing in the directory where this script is invoked.
 #### Usage
 ```
 sh .../file-splitter.sh extremely-large.csv 2000
