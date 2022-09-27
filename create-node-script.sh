@@ -3,9 +3,7 @@
 #
 # @param $1 - The name of the script
 
-if [ -d './app/scripts' ]; then
-  echo "Creating './app/scripts/$1.js'..."
-  echo "import Yargs from 'yargs';
+TEMPLATE="import Yargs from 'yargs';
 const { argv } = Yargs(process.argv);
 
 /**
@@ -38,9 +36,16 @@ const $1 = async (run) => {
 (async () => {
   await $1(argv.run);
   process.exit(0);
-})();
-" > app/scripts/"$1.js"
+})();"
+
+if [ -d './app/scripts' ]; then
+  echo "Creating './app/scripts/$1.js'..."
+  echo "$TEMPLATE" > app/scripts/"$1.js"
+  echo "Created."
+elif [ -d './scripts' ]; then
+  echo "Creating './app/scripts/$1.js..."
+  echo "$TEMPLATE" > scripts/"$1.js"
   echo "Created."
 else
-  echo "'./app/scripts' directory not found.\nAborting script..."
+  echo "Neither './app/scripts' nor './scripts' directories found.\nAborting script..."
 fi
