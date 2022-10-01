@@ -5,12 +5,12 @@
 # Run this script from the folder you wish to create the API.
 
 # Create subdirectory structure
-mkdir app config app/components app/components/template app/router app/lib
+mkdir app config app/components app/components/template app/lib app/router app/scripts
 
 # Install dependencies
 npm init -y &&
-yarn add express dotenv knex morgan &&
-yarn add -D nodemon eslint &&
+yarn add express dotenv morgan &&
+yarn add -D dark-args eslint nodemon js-shade &&
 
 # Update package.json
 npm pkg set scripts.dev='nodemon app/app.js' &&
