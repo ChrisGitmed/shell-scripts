@@ -5,31 +5,35 @@
 #
 # @param $1 - The name of the script to be created
 
-template="import Yargs from 'yargs';
-const { argv } = Yargs(process.argv);
+# Ensure a script name has been provided
+if [ -z $1 ]
+then
+  echo "Script name is required.\nExiting."
+  exit 0
+fi
+
+# Create script skeleton from template
+template="import { argv } from 'dark-args';
+import { Shade } from 'js-shade';
 
 /**
- * {DESCRIPTION}
- *
  * Invoke the script like this:
  * node app/scripts/$1.js --run
  *
  * @param {*} run - The run flag
  */
 const $1 = async (run) => {
-  console.log(\`\${run ? 'REAL' : 'DRY'} RUN\\\n\`);
-
   try {
     // If dry run
     if (!run) {
-      console.log('Use \'--run\' to {DO STUFF}.\\\n');
+      console.log(Shade.yellow('DRY Run'));
+      console.log(\`Use \${Shade.green('--run')} to...\`);
       return;
     }
-
     // Real run
+    console.log(Shade.yellow('REAL Run'));
 
-
-    console.log('Fin\\\n');
+    console.log('Fin!');
   } catch (err) {
     console.error('An error occurred: ', err);
   }
@@ -40,14 +44,15 @@ const $1 = async (run) => {
   process.exit(0);
 })();"
 
-if [ -d 'app/scripts' ]; then
-  echo "Creating 'app/scripts/$1.js'..."
+# Check if the directory app/scripts exists, if yes write file
+if [ -d 'app/scripts' ]
+then
   echo "$template" > app/scripts/"$1.js"
-  echo "Created."
-elif [ -d 'scripts' ]; then
-  echo "Creating 'scripts/$1.js..."
+  echo "Created 'app/scripts/$1.js'."
+elif [ -d 'scripts' ]
+then
   echo "$template" > scripts/"$1.js"
-  echo "Created."
+  echo "Created 'scripts/$1.js'."
 else
-  echo "Neither 'app/scripts' nor 'scripts' directories found.\nAborting script..."
+  echo "Neither 'app/scripts' nor 'scripts' directories found.\nExiting."
 fi
