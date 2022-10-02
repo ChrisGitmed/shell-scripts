@@ -12,8 +12,20 @@ then
   exit 0
 fi
 
+# Ensure either 'app/scripts' or 'scripts' directories exist
+if [ -d 'app/scripts' ]
+then
+  RELATIVE_PATH="app/scripts/$1.js"
+elif [ -d 'scripts' ]
+then
+  RELATIVE_PATH="scripts/$1.js"
+else
+  echo "Neither 'app/scripts' nor 'scripts' directories found.\nExiting."
+  exit 0
+fi
+
 # Create script skeleton from template
-template="import { argv } from 'dark-args';
+TEMPLATE="import { argv } from 'dark-args';
 import { Shade } from 'js-shade';
 
 /**
@@ -44,15 +56,5 @@ const $1 = async (run) => {
   process.exit(0);
 })();"
 
-# Check if the directory app/scripts exists, if yes write file
-if [ -d 'app/scripts' ]
-then
-  echo "$template" > app/scripts/"$1.js"
-  echo "Created 'app/scripts/$1.js'."
-elif [ -d 'scripts' ]
-then
-  echo "$template" > scripts/"$1.js"
-  echo "Created 'scripts/$1.js'."
-else
-  echo "Neither 'app/scripts' nor 'scripts' directories found.\nExiting."
-fi
+echo "$TEMPLATE" > $RELATIVE_PATH
+echo "Created $RELATIVE_PATH."
