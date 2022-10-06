@@ -1,9 +1,10 @@
 # Creates a basic Node.js script file in './app/scripts/', if
-# the directory exists, if it does not, it creates the file in
-# './scripts/', if that directory does not exist either, no file
+# the directory exists. If not, it creates the file in
+# './scripts/'. If that directory does not exist either, no file
 # will be created. The desired script name is the only parameter.
 #
-# @param $1 - The name of the script to be created
+# Invoke the script like this:
+# sh create-node-script.sh scriptName
 
 # Ensure a script name has been provided
 if [ -z $1 ]
