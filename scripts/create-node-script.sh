@@ -1,9 +1,11 @@
-# Creates a basic Node.js script file in './app/scripts/', if
-# the directory exists, if it does not, it creates the file in
-# './scripts/', if that directory does not exist either, no file
-# will be created. The desired script name is the only parameter.
+# Generates a Node.js script file in either './app/scripts' or './scripts',
+# if they exist. If they do not, no script file will be created.
 #
-# @param $1 - The name of the script to be created
+# Params: 
+#   $1: The desired name of the script
+#
+# Invoke the script like this:
+# sh create-node-script.sh scriptName
 
 # Ensure a script name has been provided
 if [ -z $1 ]
@@ -24,13 +26,12 @@ else
   exit 0
 fi
 
-# Create script skeleton from template
+# Format template
 TEMPLATE="import { argv } from 'dark-args';
-import { Shade } from 'js-shade';
 
 /**
  * Invoke the script like this:
- * node app/scripts/$1.js --run
+ * node $RELATIVE_PATH --run
  *
  * @param {*} run - The run flag
  */
@@ -38,12 +39,11 @@ const $1 = async (run) => {
   try {
     // If dry run
     if (!run) {
-      console.log(Shade.yellow('DRY Run'));
-      console.log(\`Use \${Shade.green('--run')} to...\`);
+      // Code goes here
       return;
     }
     // Real run
-    console.log(Shade.yellow('REAL Run'));
+    // Code goes here
 
     console.log('Fin!');
   } catch (err) {
@@ -56,5 +56,7 @@ const $1 = async (run) => {
   process.exit(0);
 })();"
 
+# Write file
 echo "$TEMPLATE" > $RELATIVE_PATH
 echo "Created $RELATIVE_PATH."
+echo "Fin!"

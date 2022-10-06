@@ -3,34 +3,49 @@
 A collection of shell scripts I use to increase productivity.
 
 ---
-## create-node-api.sh
-Creates a Node.js HTTP server in the directory this script is invoked. Includes subdirectory structure, dependency installs, router, error handlers, a linter based on the AirBnB JS style guide, and more. Once run, you can immediately run `yarn dev` to start the server on port 8080.
+## create-express-api.sh
+Automates the setup of a basic HTTP server built on Express.js.
+Includes initialization of `package.json`, dependency installs, directory
+structure, and all boilerplate code needed to get up and running ASAP.
+Once run, you can immediately start the server on port 8080 with
+`yarn dev` or `yarn run`.
 #### Usage
 ```
-sh create-node-api.sh
+sh create-express-api.sh
 ```
 
 
-## create-node-npm.js
-A simplified Node.js template a use for minor projects, like small NPM packages. Creates a `package.json`, and `index.js` with minimal boilerplate code.
+## create-node-basic.js
+Automates the setup of a bare-bones Node.js workspace. Initializes `package.json`, installs dependencies, creates directory structure, and writes the `.gitignore`.
 #### Usage
 ```
-sh create-node-npm.sh packageName
+sh create-node-basic.sh
 ```
 
 
 ## create-node-script.sh
-Creates a basic Node.js script file in `app/scripts/`, if the directory exists, if it does not, it creates the file in `scripts/`, if that directory does not exist either, no file will be created. The desired script name is the only parameter.
+Generates a Node.js script file in either `./app/scripts` or `./scripts`,
+if they exist. If they do not, no script file will be created.
 #### Usage
 ```
 sh create-node-script.sh scriptName
 ```
 
 
-## file-splitter.sh
-Splits a large CSV into multiple smaller CSVs, preserving headers. The size of each chunked CSV is determined by the second parameter. Outputs the resulting CSVs to a subdirectory `split/` residing in the directory where this script is invoked.
+## create-ts-basic.sh
+Automates the setup of a bare-bones TypeScript application.
+Initializes `package.json`, installs dependencies, creates directory structure,
+and writes the `.gitignore` and `tsconfig.json`.
 #### Usage
 ```
-sh file-splitter.sh extremely-large.csv 2000
+sh create-ts-basic.sh
+```
+
+
+## file-splitter.sh
+Splits a large CSV into (potentially) many smaller CSVs, preserving headers. The size of each chunked CSV is determined by the second parameter. Outputs the resulting CSVs to a subdirectory `split/` residing in the directory where this script is invoked.
+#### Usage
+```
+sh file-splitter.sh ~/path-to-file/extremely-large.csv 20000
 ```
 ---
