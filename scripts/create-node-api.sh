@@ -4,7 +4,7 @@
 # Once run, you can immediately start the server with 'yarn dev' or 'yarn run'.
 # 
 # Invoke the script like this
-# sh .../create-node-api.sh
+# sh create-node-api.sh
 
 # Initialize package.json
 npm init -y

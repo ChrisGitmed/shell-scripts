@@ -3,7 +3,7 @@
 # directory structure, and writes the .gitignore.
 #
 # Invoke the script like this:
-# sh .../create-node-basic.sh
+# sh create-node-basic.sh
 
 # Initialize package.json
 npm init -y &&

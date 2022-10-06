@@ -3,7 +3,7 @@
 # directory structure, and writes the .gitignore and tsconfig.
 #
 # Invoke the script like this:
-# sh .../create-ts-basic.sh
+# sh create-ts-basic.sh
 
 # Initialize package.json
 yarn init -y &&

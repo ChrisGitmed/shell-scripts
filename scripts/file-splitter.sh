@@ -9,7 +9,7 @@
 #   $2: The maximum row size of the smaller CSVs
 #
 # Invoke the script like this:
-# sh .../file-splitter.sh ~/path-to-file/extremely-large.csv 20000
+# sh file-splitter.sh ~/path-to-file/extremely-large.csv 20000
 
 filepath=$1
 header=$(head -1 $filepath)
