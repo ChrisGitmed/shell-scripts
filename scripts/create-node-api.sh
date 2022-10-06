@@ -1,20 +1,27 @@
-# Creates a basic HTTP server built on Express.js
-# Includes creating subdirectory structure, installing dependencies,
-# and everything else needed for a bare-bones API.
-#
-# Run this script from the folder you wish to create the API.
+# Automates the setup of a basic HTTP server built on Express.js.
+# Includes initialization of package.json, dependency installs, directory
+# structure, and all boilerplate code needed to get up and running ASAP.
+# Once run, you can immediately start the server with 'yarn dev' or 'yarn run'.
+# 
+# Invoke the script like this
+# sh .../create-node-api.sh
 
-# Create subdirectory structure
-mkdir app config app/components app/components/template app/lib app/router app/scripts
+# Initialize package.json
+npm init -y
 
 # Install dependencies
-npm init -y &&
 yarn add express dotenv morgan &&
 yarn add -D dark-args eslint nodemon js-shade &&
 
 # Update package.json
+npm pkg set main='app/app.js' &&
+npm pkg set version='0.0.1' &&
 npm pkg set scripts.dev='nodemon app/app.js' &&
+npm pkg set scripts.run='node app/app.js' &&
 npm pkg set type='module' &&
+
+# Create subdirectory structure
+mkdir app config app/components app/components/template app/lib app/router app/scripts
 
 # Write .gitignore
 echo '.env
@@ -274,7 +281,6 @@ import { errHandler } from '../../lib/error.js';
 import router from '../../router/index.js';
 import { Template } from './index.js';
 
-
 const bodyPropertyList = [
   'prop1',
   'prop2',
@@ -325,9 +331,7 @@ router.delete(
   },
 );
 
-
 export default router;
 " > app/components/template/routes.js
 
-
-echo '\nFin! 🚀\n'
+echo 'Fin!'

@@ -1,15 +1,16 @@
-# Sets up a simple, no-frills, Node.js workspace with no frills.
-# Initializes package.json, installs nodemon as a dev dependency,
-# creates directory structure and writes .gitignore.
+# Automates the setup of a bare-bones Node.js workspace.
+# Initializes package.json, installs dependencies, creates
+# directory structure, and writes the .gitignore.
 #
 # Invoke the script like this:
 # sh .../create-node-basic.sh
 
 # Initialize package.json
-npm init -y
+npm init -y &&
 
 # Install dependencies
-yarn add -D nodemon
+yarn add dotenv &&
+yarn add -D nodemon &&
 
 # Update package.json
 npm pkg set main='app/app.js' &&
@@ -22,7 +23,7 @@ npm pkg set type='module' &&
 mkdir app config
 
 # Create empty files
-touch app/app.js config/index.js .env .gitignore
+touch app/app.js config/index.js .env .gitignore &
 
 # Write .gitignore
 echo ".env
