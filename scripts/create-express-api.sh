@@ -141,7 +141,7 @@ echo '{
 echo "import express from 'express';
 import morgan from 'morgan';
 
-import config from '../config/index.js';
+import { config } from '../config/index.js';
 import routes from './router/index.js';
 
 const app = express();
@@ -243,12 +243,10 @@ export default router;
 echo "import dotenv from 'dotenv';
 dotenv.config()
 
-const config = {
+export const config = {
   NODE_ENV: process.env.NODE_ENV,
   port: process.env.PORT,
 };
-
-export default config;
 " > config/index.js &&
 
 # Write app/components/template/index.js
