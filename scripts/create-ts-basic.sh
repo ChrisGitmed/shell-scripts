@@ -13,12 +13,7 @@ yarn add dotenv
 yarn add -D nodemon typescript @types/node
 
 # Update package.json
-npm pkg set main='dist/app/app.js' &&
-npm pkg set version='0.0.1' &&
-npm pkg set scripts.build='tsc' &&
-npm pkg set scripts.dev='nodemon dist/app/app.js' &&
-npm pkg set scripts.run='node dist/app/app.js' &&
-npm pkg set type='module' &&
+npm pkg set main='dist/app/app.js' version='0.0.1' scripts.build='tsc' scripts.dev='nodemon dist/app/app.js' scripts.run='node dist/app/app.js' type='module'
 
 # Create directory structure
 mkdir app config
@@ -30,12 +25,12 @@ touch app/app.ts config/index.ts .env
 echo ".env
 .idea
 .vscode
-node_modules" > .gitignore &&
+node_modules" > .gitignore
 
 # Write tsconfig.json
 echo "{
   \"compilerOptions\": {
-    \"target\": \"ES2015\",
+    \"target\": \"ESNext\",
     \"module\": \"Node16\",
     \"esModuleInterop\": true,
     \"forceConsistentCasingInFileNames\" : true,
