@@ -14,11 +14,7 @@ yarn add express dotenv morgan &&
 yarn add -D dark-args eslint nodemon js-shade &&
 
 # Update package.json
-npm pkg set main='app/app.js' &&
-npm pkg set version='0.0.1' &&
-npm pkg set scripts.dev='nodemon app/app.js' &&
-npm pkg set scripts.run='node app/app.js' &&
-npm pkg set type='module' &&
+npm pkg set main='app/app.js' version='0.0.1' scripts.dev='nodemon app/app.js'  scripts.run='node app/app.js'  type='module'
 
 # Create subdirectory structure
 mkdir app config app/components app/components/template app/lib app/router app/scripts
