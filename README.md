@@ -49,6 +49,6 @@ sh file-splitter.sh ~/path-to-file/extremely-large.csv 20000
 Runs a Node.js script, and writes to a text file: logs from the script itself, the total run-time of the script, and the peak memory pressure of the script.
 #### Usage
 ```shell
-sh node-runner.sh ~/path-to-file/script.js scriptArgs
+sh node-runner.sh ~/path-to-script/script.js scriptArgs
 ```
 ---
