@@ -45,8 +45,8 @@ Splits a large CSV into (potentially) many smaller CSVs, preserving headers. The
 sh file-splitter.sh ~/path-to-file/extremely-large.csv 20000
 ```
 
-## node-runner.sh (in progress)
-Runs a Node.js script, and afterwards logs the total run-time as well as the peak memory pressure.
+## node-runner.sh
+Runs a Node.js script, and writes to a text file: logs from the script itself, the total run-time of the script, and the peak memory pressure of the script.
 #### Usage
 ```shell
 sh node-runner.sh ~/path-to-file/script.js scriptArgs
