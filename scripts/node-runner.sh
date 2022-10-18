@@ -11,16 +11,13 @@ then
   exit 0
 fi
 
-# Get the script name
-# IFS='/'
-# read -ra new_arr <<< $1
-# echo "arr $new_arr"
-
-# echo "name ${new_arr[-1]}"
-
-# Assign path and arguments
+# Assign variables
+file_name=${1##*/}
+script_name=$(echo "$file_name" | cut -f 1 -d '.')
 script_path=$1
 script_args=${@:2}
+output_filename="${script_name}Results.txt"
 
 # Run script and write to file
-node $script_path $script_args | tee test.txt
+echo "Running $file_name...\n" >> $output_filename
+(time node $script_path $script_args) 2>&1 | tee -a $output_filename
