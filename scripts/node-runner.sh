@@ -19,5 +19,6 @@ script_args=${@:2}
 output_filename="${script_name}Results.txt"
 
 # Run script and write to file
-echo "Running $file_name...\n" >> $output_filename
-(time node $script_path $script_args) 2>&1 | tee -a $output_filename
+echo "Running $file_name...\n" > $output_filename
+/usr/bin/time -al node $script_path $script_args 2>&1 | tee -a $output_filename
+echo "\nScript run complete." >> $output_filename
