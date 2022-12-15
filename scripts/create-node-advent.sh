@@ -1,32 +1,34 @@
-# Automates the setup of my Advent of Code 22 directories
-# The first argument passed to the script will be the name of the directory
+# Automates the setup of my Advent of Code 2022 directories.
+# The first argument passed to the script is the directory name.
 #
 # Invoke the script like this:
 # sh create-node-advent.sh dirName
 
-mkdir advent/$1 &&
-touch advent/$1/_.md advent/$1/_.test.js advent/$1/input.js advent/$1/solutions.js &&
+dirPath=advent/$1
+mkdir $dirPath &&
+touch $dirPath/_.md $dirPath/_.test.js $dirPath/input.js $dirPath/solutions.js &&
 
-echo "# Day $1
-
+echo "# Day: $1
 ## Part 1
 
-## Part 2" > advent/$1/_.md &&
+## Part 2" > $dirPath/_.md &&
 
 echo "const { test, expect } = require('@jest/globals');
 
 const {  } = require('./solutions');
-const inputData = require('./input');
+const { inputData } = require('./input');
 
-test('', () => {
+test('Should ', () => {
   expect((inputData)).toBe();
 });
 
-test('', () => {
+test('Should ', () => {
   expect((inputData)).toBe();
-});" > advent/$1/_.test.js
+});" > $dirPath/_.test.js
 
-echo "module.exports = \`\`;" > advent/$1/input.js
+echo "const inputData = \`\`;
+
+module.exports = { inputData }" > $dirPath/input.js
 
 echo "
 // Part 1
@@ -35,4 +37,4 @@ echo "
 // Part 2
 
 
-module.exports = {  };" > advent/$1/solutions.js
+module.exports = {  };" > $dirPath/solutions.js
