@@ -29,17 +29,9 @@ test('Should ', () => {
 
 test('Should ', () => {
   expect((inputData)).toBe();
-<<<<<<< HEAD
 });" > $testfile
 
 echo "export const inputData = \`\`;" > $inputfile
-=======
-});" > $dirPath/_.test.js
-
-echo "const inputData = \`\`;
-
-module.exports = { inputData }" > $dirPath/input.js
->>>>>>> 5f9b2d3af5e43a90af851183c25daf9afe1d087e
 
 echo "
 // Part 1
@@ -50,9 +42,4 @@ export const solutionOne = (input:string) => {
 // Part 2
 export const solutionTwo = (input:string) => {
 
-<<<<<<< HEAD
 };" > $solutionfile
-=======
-
-module.exports = {  };" > $dirPath/solutions.js
->>>>>>> 5f9b2d3af5e43a90af851183c25daf9afe1d087e
