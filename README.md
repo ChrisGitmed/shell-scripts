@@ -14,7 +14,14 @@ Once run, you can immediately start the server on port 8080 with
 sh create-express-api.sh
 ```
 
-## create-node-basic.js
+## create-node-advent.sh
+Automates the setup of my Advent of Code 2022 directories. The first argument passed to the script is the directory name.
+#### Usage
+```shell
+sh create-node-advent.sh dirName
+```
+
+## create-node-basic.sh
 Automates the setup of a bare-bones Node.js workspace. Initializes `package.json`, installs dependencies, creates directory structure, and writes the `.gitignore`.
 #### Usage
 ```shell
