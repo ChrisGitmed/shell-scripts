@@ -31,7 +31,7 @@ const solution = (input) => {
 module.exports = { solution };" > $solutionfile &&
 
 echo "const { test, expect} = require('@jest/globals');
-const { solution } = require('../solutions/palindromeRearranging');
+const { solution } = require('../solutions/$solutionfile');
 
 test('Should ', () => {
   const input = 0;
