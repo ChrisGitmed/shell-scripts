@@ -31,22 +31,24 @@ const solution = (input) => {
 module.exports = { solution };" > $solutionfile &&
 
 echo "const { test, expect} = require('@jest/globals');
-const { solution } = require('../solutions/$solutionfile');
+const { solution } = require('../$solutionfile');
 
 test('Should ', () => {
-  const input = 0;
-  expect(solution(input)).toBe();
+  const input = _;
+  const result = _;
+  expect(solution(input)).toBe(result);
 });
 
 test('Should ', () => {
-  const input = 0;
-  expect(solution(input)).toBe();
+  const input = _;
+  const result = _;
+  expect(solution(input)).toBe(result);
 });
 
 test('Should ', () => {
-  const input = 0;
-  expect(solution(input)).toBe();
-});
-" > $testfile &&
+  const input = _;
+  const result = _;
+  expect(solution(input)).toBe(result);
+});" > $testfile &&
 
 echo "Fin!"
