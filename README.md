@@ -21,6 +21,13 @@ Automates the setup of my Advent of Code 2022 directories. The first argument pa
 sh create-node-advent.sh dirName
 ```
 
+## create-node-algo.sh
+Automates the setup of my basic algorithm files. From the directory this script is invoked, creates a solution file in solutions/ and a corresponding test file in tests/. The first argument will be the name of the generated files, and is required.
+### Usage
+```
+sh create-node-algo.sh fileName
+```
+
 ## create-node-basic.sh
 Automates the setup of a bare-bones Node.js workspace. Initializes `package.json`, installs dependencies, creates directory structure, and writes the `.gitignore`.
 #### Usage
