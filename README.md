@@ -14,13 +14,6 @@ Once run, you can immediately start the server on port 8080 with
 sh create-express-api.sh
 ```
 
-## create-node-advent.sh
-Automates the setup of my Advent of Code 2022 directories. The first argument passed to the script is the directory name.
-#### Usage
-```shell
-sh create-node-advent.sh dirName
-```
-
 ## create-node-algo.sh
 Automates the setup of my basic algorithm files. From the directory this script is invoked, creates a solution file in solutions/ and a corresponding test file in tests/. The first argument will be the name of the generated files, and is required.
 ### Usage
@@ -64,5 +57,12 @@ Runs a Node.js script, and writes to a text file: logs from the script itself, t
 #### Usage
 ```shell
 sh node-runner.sh ~/path-to-script/script.js scriptArgs
+```
+
+## req-stress-tester.sh
+Spams an API endpoint with as many requests as possible within ten seconds. Use responsibly.
+#### Usage
+```shell
+sh req-stress-tester.sh ${endpoint}
 ```
 ---
