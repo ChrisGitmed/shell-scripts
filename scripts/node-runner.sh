@@ -1,8 +1,10 @@
-# Runs a Node.js script, and writes logs from the script run, the total run-time,
-# as well as the peak memory pressure to a .txt file.
-# 
-# Invoke the script like this
-# sh node-runner.sh path-to-script/script.js scriptArgs
+<<c
+ Runs a Node.js script, and writes logs from the script run, the total run-time,
+ as well as the peak memory pressure to a .txt file.
+ 
+ Invoke the script like this:
+ sh node-runner.sh path-to-script/script.js scriptArgs
+c
 
 # Validate at least one param has been passed
 if [[ ! -n $1 ]];

@@ -1,10 +1,10 @@
-<<com
+<<c
   Receives a URL as a parameter and hits the endpoint with as many HTTP requests as possible for a short time
   Currently can not send anything in the request body
 
   Invoke the script like this:
   sh req-stress-tester.sh ${endpoint}
-com
+c
 
 
 # Set the API endpoint using the provided parameter
